@@ -23,6 +23,7 @@ class App extends React.Component{
     // binding, constructor iin this iig ashiglah  
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   // Defining handleInput method (inputiig avah)
@@ -54,6 +55,14 @@ class App extends React.Component{
     }
   }
 
+  // delete item
+  deleteItem(key){
+    const filteredItems = this.state.items.filter(item => item.key !== key);
+    this.setState({
+      items: filteredItems
+    })
+  }
+
   // Rendering
   render(){
     return(
@@ -73,7 +82,8 @@ class App extends React.Component{
 
         </form>
       </header>
-      <ListItems items = {this.state.items}></ListItems>
+      <ListItems items = {this.state.items}
+      deleteItem = {this.deleteItem}></ListItems>
       </div>
     );
   }
