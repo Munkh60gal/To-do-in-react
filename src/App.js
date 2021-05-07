@@ -24,6 +24,7 @@ class App extends React.Component{
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.setUpdate = this.setUpdate.bind(this);
   }
 
   // Defining handleInput method (inputiig avah)
@@ -63,6 +64,18 @@ class App extends React.Component{
     })
   }
 
+  setUpdate(text, key){
+    const items = this.state.items;
+    items.map(item=>{
+      if(item.key === key){
+        item.text=text;
+      }
+    })
+
+    this.setState({
+      items: items
+    })
+  }
   // Rendering
   render(){
     return(
@@ -76,14 +89,15 @@ class App extends React.Component{
           placeholder = "What do you want to do ?" 
           value={this.state.currentItem.text} /* CurrentItem Input field 2iig holboh */
           onChange={this.handleInput} // handling userinpunt in realtime
-          />
+          /> 
 
           <button type="submit">Add</button>
 
         </form>
       </header>
       <ListItems items = {this.state.items}
-      deleteItem = {this.deleteItem}></ListItems>
+      deleteItem = {this.deleteItem}
+      setUpdate = {this.setUpdate}></ListItems> 
       </div>
     );
   }
